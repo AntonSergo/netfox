@@ -122,7 +122,12 @@ struct FastRequestResultSecurityCenterView: View {
                     }
                     .onChange(of: isSecurityOn) { value in
                         if isSubscriptionActive, value {
-                            goPrivacy()
+                            ProgressHUD.animate(localizeText(forKey: .alertText), interaction: false)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                self.showSuccessAction()
+                                self.goPrivacy()
+                            }
                         }
                     }
                 }
@@ -141,7 +146,12 @@ struct FastRequestResultSecurityCenterView: View {
                     }
                     .onChange(of: isPasswordsOn) { value in
                         if isSubscriptionActive, value {
-                            goPass()
+                            ProgressHUD.animate(localizeText(forKey: .alertText), interaction: false)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                self.showSuccessAction()
+                                self.goPass()
+                            }
                         }
                     }
                     
@@ -158,7 +168,12 @@ struct FastRequestResultSecurityCenterView: View {
                     }
                     .onChange(of: isCacheOn) { value in
                         if isSubscriptionActive, value {
-                            goSafari()
+                            ProgressHUD.animate(localizeText(forKey: .alertText), interaction: false)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                self.showSuccessAction()
+                                self.goSafari()
+                            }
                         }
                     }
                 }
