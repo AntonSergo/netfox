@@ -58,6 +58,7 @@ struct FastRequestResultSecurityCenterView: View {
                                           disactiveTitle: model?.scn?.features?[0].b_status ?? "",
                                           backColor: .white,
                                           isToggleActive: $isSubscriptionActive)
+                    .toggleStyle(SymbolToggleStyle())
                     .disabled(true)
                     .onTapGesture {
                         if !isSubscriptionActive {
