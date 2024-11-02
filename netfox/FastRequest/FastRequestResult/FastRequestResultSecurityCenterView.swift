@@ -25,7 +25,7 @@ struct FastRequestResultSecurityCenterView: View {
                         .cornerRadius(5)
                         .frame(width: 70, height: 70)
                     
-                    KFImage(URL(string: (isSubscriptionActive ? model?.scn?.banner_icon : model?.scn?.banner_icon_unp) ?? ""))
+                    KFImage(URL(string: model?.scn?.banner_icon ?? ""))
                         .setProcessor(SVGImgProcessor())
                         .resizable()
                         .frame(width: 56, height: 69)
