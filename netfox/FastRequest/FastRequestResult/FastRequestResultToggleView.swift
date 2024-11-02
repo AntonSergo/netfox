@@ -55,8 +55,6 @@ struct SymbolToggleStyle: ToggleStyle {
                         .padding(3)
                         .overlay {
                             Image(systemName: systemImage)
-                                .resizable()
-                                .frame(width: 15, height: 18)
                                 .foregroundColor(configuration.isOn ? .gray : .white)
                         }
                         .offset(x: configuration.isOn ? 10 : -10)
