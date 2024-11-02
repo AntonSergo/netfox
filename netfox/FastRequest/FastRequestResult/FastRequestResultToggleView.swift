@@ -37,35 +37,36 @@ struct FastRequestResultToggleView: View {
 }
 
 struct SymbolToggleStyle: ToggleStyle {
-
- var systemImage: String = "lock.fill"
- var activeColor: Color = .green
-
- func makeBody(configuration: Configuration) -> some View {
-  HStack {
-   configuration.label
-
-   Spacer()
-
-   RoundedRectangle(cornerRadius: 30)
-    .fill(configuration.isOn ? activeColor : Color(.systemGray5))
-    .overlay {
-     Circle()
-      .fill(.white)
-      .padding(3)
-      .overlay {
-       Image(systemName: systemImage)
-        .foregroundColor(configuration.isOn ? .gray : .white)
-      }
-      .offset(x: configuration.isOn ? 10 : -10)
-
+    
+    var systemImage: String = "lock.fill"
+    var activeColor: Color = .green
+    
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+            
+            Spacer()
+            
+            RoundedRectangle(cornerRadius: 30)
+                .fill(configuration.isOn ? activeColor : Color(.systemGray5))
+                .overlay {
+                    Circle()
+                        .fill(.white)
+                        .padding(3)
+                        .overlay {
+                            Image(systemName: systemImage)
+                                .frame(width: 15, height: 18)
+                                .foregroundColor(configuration.isOn ? .gray : .white)
+                        }
+                        .offset(x: configuration.isOn ? 10 : -10)
+                    
+                }
+                .frame(width: 50, height: 32)
+                .onTapGesture {
+                    withAnimation(.spring()) {
+                        configuration.isOn.toggle()
+                    }
+                }
+        }
     }
-    .frame(width: 50, height: 32)
-    .onTapGesture {
-     withAnimation(.spring()) {
-      configuration.isOn.toggle()
-     }
-    }
-  }
- }
 }
