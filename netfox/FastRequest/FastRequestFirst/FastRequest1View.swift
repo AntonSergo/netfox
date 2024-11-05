@@ -101,6 +101,7 @@ public struct FastRequest1View: View {
                     }
                     .scrollIndicators(.hidden)
                     .frame(minHeight: 50)
+                    .padding(.top)
                     
                     Button(action: {
                         
