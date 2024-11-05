@@ -63,7 +63,7 @@ public struct FastRequestResultView: View {
                         .frame(width: 58, height: 58)
                     
                     Text(isProtect ? model?.scn?.title_anim_compl ?? "" : model?.scn?.title_anim_unp ?? "")
-                        .font(.system(size: Constants.smallScreen ? 20 : 24, weight: .semibold, design: .default))
+                        .font(.system(size: Constants.smallScreen ? 20 : 23, weight: .semibold, design: .default))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
 
@@ -114,11 +114,11 @@ public struct FastRequestResultView: View {
     private func createAtrStr() -> AttributedString {
         let attributedStrOne = NSMutableAttributedString(string: String(model?.scn?.subtitle_anim_compl?.dropLast(2) ?? ""), attributes: [
             NSAttributedString.Key.foregroundColor: UIColor().hexStringToUIColor(hex: "#000000"),
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .medium)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11, weight: .medium)
         ])
         let attributedStrTwo = NSMutableAttributedString(string: localizeText(forKey: isProtect ? .subsActive : .subsOff).uppercased(), attributes: [
             NSAttributedString.Key.foregroundColor: UIColor().hexStringToUIColor(hex: isProtect ? "#65D65C" : "#E74444"),
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold)
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .bold)
         ])
         
         attributedStrOne.append(attributedStrTwo)
