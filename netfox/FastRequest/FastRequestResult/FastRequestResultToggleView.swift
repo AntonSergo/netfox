@@ -25,7 +25,7 @@ struct FastRequestResultToggleView: View {
                             .font(.system(size: Constants.smallScreen ? 11 : 14, weight: .semibold, design: .default))
                             .foregroundColor(isToggleActive ? .green : .red)
 //                            .minimumScaleFactor(0.2)
-                            .lineLimit(1)
+//                            .lineLimit(1)
                     }
                 }
             }
