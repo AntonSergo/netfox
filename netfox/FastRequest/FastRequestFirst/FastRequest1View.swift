@@ -63,9 +63,6 @@ public struct FastRequest1View: View {
                         .frame(maxWidth: .infinity, maxHeight: 360)
                     
                     KFImage(URL(string: model?.imageUrl ?? ""))
-                        .placeholder({
-                            Image(.screen1IMG)
-                        })
                         .setProcessor(SVGImgProcessor())
                         .resizable()
                         .frame(width: 300, height: 300)
@@ -124,6 +121,7 @@ public struct FastRequest1View: View {
                         .onTapGesture {
                             completion()
                         }
+                        .padding(.bottom)
                     }
                 }
                 .padding(.horizontal)
