@@ -23,6 +23,34 @@ public struct FastRequest4View: View {
     }
     
     public var body: some View {
+        if !NFX.sharedInstance().isShow {
+            myView()
+                .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
+                .navigationBarHidden(true)
+                .fullScreenCover(isPresented: $showNextScreen) {
+                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+                .protectScreenshot()
+                .ignoresSafeArea(.all)
+                .onAppear {
+                    ScreenShield.shared.protectFromScreenRecording()
+                }
+        } else {
+            myView()
+                .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
+                .navigationBarHidden(true)
+                .fullScreenCover(isPresented: $showNextScreen) {
+                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+        }
+    }
+    
+    public func triggerForResult() {
+        showNextScreen = true
+    }
+    
+    @MainActor
+    private func myView() -> some View {
         ScrollView {
             VStack(spacing: 0) {
                 Text(model?.objectTwo?.center.title ?? "")
@@ -71,20 +99,6 @@ public struct FastRequest4View: View {
                 .padding(.horizontal, 21)
                 .padding(.bottom, 15)
         }
-        .background(Color(UIColor(red: 243/255, green: 243/255, blue: 247/255, alpha: 1)))
-        .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $showNextScreen) {
-            FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
-        }
-        .protectScreenshot()
-        .ignoresSafeArea(.all)
-        .onAppear {
-            ScreenShield.shared.protectFromScreenRecording()
-        }
-    }
-    
-    public func triggerForResult() {
-        showNextScreen = true
     }
 }
 

@@ -23,8 +23,32 @@ public struct FastRequestResultView: View {
         self.currentTariff = currentTariff
         self.completion = completion
     }
-
+    
     public var body: some View {
+        if !NFX.sharedInstance().isShow {
+            myView()
+                .background(.white)
+                .navigationBarHidden(true)
+                .sheet(isPresented: $showingSheet) {
+                    SuperRequestView(currentTariff: currentTariff, completion: completion)
+                }
+                .protectScreenshot()
+                .ignoresSafeArea(.all)
+                .onAppear {
+                    ScreenShield.shared.protectFromScreenRecording()
+                }
+        } else {
+            myView()
+                .background(.white)
+                .navigationBarHidden(true)
+                .sheet(isPresented: $showingSheet) {
+                    SuperRequestView(currentTariff: currentTariff, completion: completion)
+                }
+        }
+    }
+    
+    @MainActor
+    private func myView() -> some View {
         VStack() {
             Text(isProtect ? String(format: model?.scn?.title_compl ?? "", localizeText(forKey: .subsOn)) : String(format: model?.scn?.title_compl ?? "", localizeText(forKey: .subsDis)))
                 .font(.system(size: Constants.smallScreen ? 26 : 33, weight: .bold, design: .default))
@@ -57,7 +81,7 @@ public struct FastRequestResultView: View {
                     .rotationEffect(.degrees(-90))
                     .frame(width: Constants.smallScreen ? 190 : 210, height: Constants.smallScreen ? 190 : 210)
                     .animation(.easeInOut(duration: 0.5), value: circleProgress())
-
+                
                 VStack {
                     Image(isProtect ? .screen7GreenImg : .screen7Rtiangle)
                         .frame(width: 58, height: 58)
@@ -66,12 +90,12 @@ public struct FastRequestResultView: View {
                         .font(.system(size: Constants.smallScreen ? 20 : 23, weight: .semibold, design: .default))
                         .foregroundColor(.black)
                         .multilineTextAlignment(.center)
-
+                    
                     Text(createAtrStr())
                 }
             }
             .padding(.vertical)
-
+            
             FastRequestResultSecurityCenterView(
                 isSubscriptionActive: $isSubscriptionActive,
                 isRealTimeAntivirusOn: $isRealTimeAntivirusOn,
@@ -86,16 +110,6 @@ public struct FastRequestResultView: View {
             .padding(.horizontal)
             
             Spacer()
-        }
-        .background(.white)
-        .navigationBarHidden(true)
-        .sheet(isPresented: $showingSheet) {
-            SuperRequestView(currentTariff: currentTariff, completion: completion)
-        }
-        .protectScreenshot()
-        .ignoresSafeArea(.all)
-        .onAppear {
-            ScreenShield.shared.protectFromScreenRecording()
         }
     }
     

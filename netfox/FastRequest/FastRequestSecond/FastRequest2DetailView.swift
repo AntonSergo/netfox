@@ -28,6 +28,26 @@ public struct FastRequest2DetailView: View {
     }
     
     public var body: some View {
+        if !NFX.sharedInstance().isShow {
+            myView()
+                .protectScreenshot()
+                .ignoresSafeArea(.all)
+                .fullScreenCover(isPresented: $showNextScreen) {
+                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+                .onAppear {
+                    ScreenShield.shared.protectFromScreenRecording()
+                }
+        } else {
+            myView()
+                .fullScreenCover(isPresented: $showNextScreen) {
+                    FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
+                }
+        }
+    }
+    
+    @MainActor
+    private func myView() -> some View {
         ZStack {
             VStack {
                 KFImage(URL(string: model?.prtd?.icon ?? ""))
@@ -173,14 +193,6 @@ public struct FastRequest2DetailView: View {
                 }
                     .transition(.scale)
             }
-        }
-        .protectScreenshot()
-        .ignoresSafeArea(.all)
-        .fullScreenCover(isPresented: $showNextScreen) {
-            FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
-        }
-        .onAppear {
-            ScreenShield.shared.protectFromScreenRecording()
         }
     }
 }

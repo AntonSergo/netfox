@@ -55,6 +55,20 @@ public struct FastRequest1View: View {
     }
     
     public var body: some View {
+        if !NFX.sharedInstance().isShow {
+            myView()
+                .protectScreenshot()
+                .ignoresSafeArea(.all)
+                .onAppear {
+                    ScreenShield.shared.protectFromScreenRecording()
+                }
+        } else {
+            myView()
+        }
+    }
+    
+    @MainActor
+    private func myView() -> some View {
         ZStack {
             VStack(alignment: .center, spacing: 0) {
                 ZStack {
@@ -134,11 +148,6 @@ public struct FastRequest1View: View {
             .fullScreenCover(isPresented: $showNextScreen) {
                 FastRequestResultView(isSubscriptionActive: .constant(true), model: model, currentTariff: currentTariff, completion: nil)
             }
-        }
-        .protectScreenshot()
-        .ignoresSafeArea(.all)
-        .onAppear {
-            ScreenShield.shared.protectFromScreenRecording()
         }
     }
 }
