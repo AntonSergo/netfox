@@ -48,6 +48,15 @@ struct FastRequestResultToggleView: View {
                 image = .screen7RedMark
             }
         }
+        .onAppear {
+            if isToggleActive {
+                text = activeTitle
+                image = .screen7GreenMark
+            } else {
+                text = disactiveTitle
+                image = .screen7RedMark
+            }
+        }
     }
 }
 
