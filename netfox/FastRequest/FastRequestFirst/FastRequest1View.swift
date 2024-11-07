@@ -105,13 +105,12 @@ public struct FastRequest1View: View {
                         .font(.system(size: Constants.smallScreen ? 14 : 16, weight: .semibold, design: .default))
                         .foregroundStyle(.black)
                         .multilineTextAlignment(.center)
-                        .padding(.bottom)
                     
                     ScrollView {
                         ForEach(redMockArray,
                                 id: \.title) { item in
                             InfoCellView(title: item.title, iconName: item.imageName ?? .screen1Icon2)
-                                .padding(.horizontal, 1)
+                                .padding(.horizontal, 2)
                         }
                     }
                     .scrollIndicators(.hidden)
