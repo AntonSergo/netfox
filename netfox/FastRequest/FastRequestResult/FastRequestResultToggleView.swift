@@ -6,8 +6,6 @@ struct FastRequestResultToggleView: View {
     let activeTitle: String
     let disactiveTitle: String
     let backColor: Color
-    @State var text: String = ""
-    @State var image: ImageResource = .screen7RedMark
     
     @Binding var isToggleActive: Bool
     
@@ -20,10 +18,10 @@ struct FastRequestResultToggleView: View {
                         .foregroundColor(Color(red: 103/255, green: 103/255, blue: 103/255))
                     
                     HStack(spacing: 5) {
-                        Image(image)
+                        Image(isToggleActive ? .screen7GreenMark : .screen7RedMark)
                             .frame(width: 12, height: 12)
                         
-                        Text(text)
+                        Text(isToggleActive ? activeTitle : disactiveTitle)
                             .font(.system(size: Constants.smallScreen ? 11 : 14, weight: .semibold, design: .default))
                             .foregroundColor(isToggleActive ? .green : .red)
                             .minimumScaleFactor(0.2)
@@ -37,26 +35,6 @@ struct FastRequestResultToggleView: View {
         .frame(height: 55)
         .background(backColor)
         .cornerRadius(10)
-        .onChange(of: isToggleActive) { newVal in
-            if newVal {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    text = activeTitle
-                    image = .screen7GreenMark
-                }
-            } else {
-                text = disactiveTitle
-                image = .screen7RedMark
-            }
-        }
-        .onAppear {
-            if isToggleActive {
-                text = activeTitle
-                image = .screen7GreenMark
-            } else {
-                text = disactiveTitle
-                image = .screen7RedMark
-            }
-        }
     }
 }
 
