@@ -122,8 +122,6 @@ public struct FastRequestResultView: View {
             isProtect = result == 1
         }
         
-        sleep(2)
-        
         return result
     }
     
