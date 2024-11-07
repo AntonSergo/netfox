@@ -38,11 +38,8 @@ struct FastRequestResultToggleView: View {
         .background(backColor)
         .cornerRadius(10)
         .onChange(of: isToggleActive) { newVal in
-            
             if newVal {
-                isToggleActive = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    isToggleActive = true
                     text = activeTitle
                     image = .screen7GreenMark
                 }
