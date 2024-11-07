@@ -180,7 +180,7 @@ public struct FastRequest3View: View {
 
 extension LAContext {
     enum BiometricType: String {
-        case none = "Face ID"
+        case none = "FaceID"
         case touchID = "Touch ID"
         case faceID = "Face ID"
     }
