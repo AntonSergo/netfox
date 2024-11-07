@@ -79,8 +79,15 @@ public struct FastRequest3View: View {
                             })
                         )
                     case .second:
-                        let authText = LAContext().biometricType.rawValue
-                        let alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
+                        let alertMess: String
+                        
+                        if LAContext().biometricType == .none {
+                            alertMess = model?.objectTwo?.dark_blue.al_subtitle_no_bio ?? ""
+                        } else {
+                            let authText = LAContext().biometricType.rawValue
+                            
+                            alertMess = String(format: model?.objectTwo?.dark_blue.al_subtitle ?? "", authText)
+                        }
                         
                         return Alert(
                             title: Text(model?.objectTwo?.dark_blue.al_title ?? ""),
@@ -173,7 +180,7 @@ public struct FastRequest3View: View {
 
 extension LAContext {
     enum BiometricType: String {
-        case none = "faceID"
+        case none = "Face ID"
         case touchID = "Touch ID"
         case faceID = "Face ID"
     }
